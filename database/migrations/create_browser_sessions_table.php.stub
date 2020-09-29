@@ -1,0 +1,20 @@
+<?php
+
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class CreateBrowserSessionsTable extends Migration
+{
+    public function up()
+    {
+        Schema::create('browser_sessions', function (Blueprint $table) {
+            $table->uuid('uuid')->primary();
+            $table->unsignedBigInteger('user_id')->nullable()->index();
+            $table->string('ip_address', 45)->nullable();
+            $table->text('user_agent')->nullable();
+            $table->boolean('remember')->default(false);
+            $table->integer('last_activity')->index();
+        });
+    }
+}
